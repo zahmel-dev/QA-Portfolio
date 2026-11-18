@@ -16,3 +16,22 @@ QA-Portfolio/
     ├── unit/               # Unit tests for src/exercises
     └── e2e/                # UI & E2E tests structured via POM (Playwright & Selenium)
 ```
+
+## Setup & Running Tests
+
+### Option 1: Using `uv` (Recommended)
+If you have [uv](https://astral.sh) installed, you can run the test suite directly. `uv` will automatically create a virtual environment and install all exact dependencies from `uv.lock`:
+
+```bash
+uv run pytest
+```
+
+### Option 2: Using standard `pip`
+Alternatively, create a virtual environment manually, install the project dependencies from `pyproject.toml`, and run `pytest`:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+pip install .
+pytest
+```
