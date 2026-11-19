@@ -39,3 +39,27 @@ def edge_case_inputs(request):
 def test_count_word_matches_edge_cases(edge_case_inputs):
     text, target, expected = edge_case_inputs
     assert count_word_matches(text, target) == expected
+
+
+# Exercise 3: Negative Testing
+@pytest.fixture(
+    params=[
+        (None, "word", 0),
+        ("hello world", None, 0),
+        (123, "word", AttributeError),
+        ("hello world", 456, AttributeError),
+        (["hello", "world"], "world", AttributeError),
+        ("hello world", ["world"], AttributeError),
+    ]
+)
+def negative_inputs(request):
+    return request.param
+
+
+def test_count_word_matches_negative(negative_inputs):
+    text, target, expected = negative_inputs
+    if expected is AttributeError:
+        with pytest.raises(AttributeError):
+            count_word_matches(text, target)
+    else:
+        assert count_word_matches(text, target) == expected
